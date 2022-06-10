@@ -18,6 +18,7 @@ namespace kyrsvoiar.Models
         public int Idowner { get; set; }
         public string Admincode { get; set; }
 
+        public virtual Owner IdownerNavigation { get; set; }
         public virtual ICollection<Iot> Iot { get; set; }
     }
 }
