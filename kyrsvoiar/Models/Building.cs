@@ -9,16 +9,9 @@ namespace kyrsvoiar.Models
 {
     public partial class Building
     {
-        public Building()
-        {
-            Iot = new HashSet<Iot>();
-        }
-
         public int Idbuilding { get; set; }
         public int Idowner { get; set; }
         public string Admincode { get; set; }
 
-        public virtual Owner IdownerNavigation { get; set; }
-        public virtual ICollection<Iot> Iot { get; set; }
     }
 }

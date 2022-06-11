@@ -13,6 +13,5 @@ namespace kyrsvoiar.Models
         public int Idiot { get; set; }
         public string Code { get; set; }
 
-        public virtual Iot IdiotNavigation { get; set; }
     }
 }

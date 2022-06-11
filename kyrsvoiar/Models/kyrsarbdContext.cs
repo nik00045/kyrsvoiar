@@ -42,7 +42,8 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idanchor)
                     .HasColumnName("idanchor")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
+                    
 
                 entity.Property(e => e.Code)
                     .HasColumnName("code")
@@ -51,11 +52,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idiot).HasColumnName("idiot");
 
-                entity.HasOne(d => d.IdiotNavigation)
-                    .WithMany(p => p.Anchor)
-                    .HasForeignKey(d => d.Idiot)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_anchor_iot");
+            
             });
 
             modelBuilder.Entity<Building>(entity =>
@@ -66,20 +63,19 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idbuilding)
                     .HasColumnName("idbuilding")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Idowner).HasColumnName("idowner");
+
 
                 entity.Property(e => e.Admincode)
                     .HasColumnName("admincode")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Idowner).HasColumnName("idowner");
+                
 
-                entity.HasOne(d => d.IdownerNavigation)
-                    .WithMany(p => p.Building)
-                    .HasForeignKey(d => d.Idowner)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_building_owner");
+               
             });
 
             modelBuilder.Entity<Iot>(entity =>
@@ -90,7 +86,9 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idiot)
                     .HasColumnName("idiot")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Idbuilding).HasColumnName("idbuilding");
 
                 entity.Property(e => e.Coordinatex)
                     .HasColumnName("coordinatex")
@@ -102,18 +100,13 @@ namespace kyrsvoiar.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Idbuilding).HasColumnName("idbuilding");
+
 
                 entity.Property(e => e.Price)
                     .HasColumnName("price")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdbuildingNavigation)
-                    .WithMany(p => p.Iot)
-                    .HasForeignKey(d => d.Idbuilding)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_iot_building");
             });
 
             modelBuilder.Entity<Owner>(entity =>

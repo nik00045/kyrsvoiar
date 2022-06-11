@@ -9,10 +9,6 @@ namespace kyrsvoiar.Models
 {
     public partial class Iot
     {
-        public Iot()
-        {
-            Anchor = new HashSet<Anchor>();
-        }
 
         public int Idiot { get; set; }
         public int Idbuilding { get; set; }
@@ -20,7 +16,5 @@ namespace kyrsvoiar.Models
         public string Coordinatex { get; set; }
         public string Coordinatey { get; set; }
 
-        public virtual Building IdbuildingNavigation { get; set; }
-        public virtual ICollection<Anchor> Anchor { get; set; }
     }
 }
