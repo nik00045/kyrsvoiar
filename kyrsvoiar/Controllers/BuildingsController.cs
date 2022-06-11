@@ -13,9 +13,9 @@ namespace kyrsvoiar.Controllers
     [ApiController]
     public class BuildingsController : ControllerBase
     {
-        private readonly mobilearContext _context;
+        private readonly kyrsarbdContext _context;
 
-        public BuildingsController(mobilearContext context)
+        public BuildingsController(kyrsarbdContext context)
         {
             _context = context;
         }

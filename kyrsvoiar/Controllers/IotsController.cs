@@ -13,9 +13,9 @@ namespace kyrsvoiar.Controllers
     [ApiController]
     public class IotsController : ControllerBase
     {
-        private readonly mobilearContext _context;
+        private readonly kyrsarbdContext _context;
 
-        public IotsController(mobilearContext context)
+        public IotsController(kyrsarbdContext context)
         {
             _context = context;
         }

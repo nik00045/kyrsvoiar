@@ -13,9 +13,9 @@ namespace kyrsvoiar.Controllers
     [ApiController]
     public class mobileController : ControllerBase
     {
-        private readonly mobilearContext _context;
+        private readonly kyrsarbdContext _context;
 
-        public mobileController(mobilearContext context)
+        public mobileController(kyrsarbdContext context)
         {
           //  var contex = new mobilearContext();
             _context = context;

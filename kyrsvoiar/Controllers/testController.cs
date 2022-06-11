@@ -17,7 +17,7 @@ namespace kyrsar.Controllers
         [HttpGet]
         public IEnumerable<Owner> Get()
         {
-            using (var contex = new mobilearContext()) {
+            using (var contex = new kyrsarbdContext()) {
                 return contex.Owner.ToList();
 
 

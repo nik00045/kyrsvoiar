@@ -29,7 +29,7 @@ namespace kyrsvoiar
         {
             services.AddControllers();
             // services.AddScoped<mobilearContext, mobilearContext()>();
-            services.AddDbContext<mobilearContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MobileARDB")));
+            services.AddDbContext<kyrsarbdContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MobileARDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,9 +13,9 @@ namespace kyrsvoiar.Controllers
     [ApiController]
     public class OwnersController : ControllerBase
     {
-        private readonly mobilearContext _context;
+        private readonly kyrsarbdContext _context;
 
-        public OwnersController(mobilearContext context)
+        public OwnersController(kyrsarbdContext context)
         {
             _context = context;
         }
