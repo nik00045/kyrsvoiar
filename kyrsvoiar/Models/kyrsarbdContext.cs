@@ -41,7 +41,7 @@ namespace kyrsvoiar.Models
                 entity.ToTable("anchor");
 
                 entity.Property(e => e.Idanchor)
-                    .HasColumnName("idanchor").ValueGeneratedNever();
+                    .HasColumnName("idanchor").ValueGeneratedOnAdd();
                    
                     
 
@@ -63,7 +63,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idbuilding)
                     .HasColumnName("idbuilding")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Idowner).HasColumnName("idowner");
 
@@ -86,7 +86,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idiot)
                     .HasColumnName("idiot")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Idbuilding).HasColumnName("idbuilding");
 
@@ -117,7 +117,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idowner)
                     .HasColumnName("idowner")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Mail)
                     .IsRequired()
