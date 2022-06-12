@@ -41,6 +41,22 @@ namespace kyrsvoiar.Controllers
             return iot;
         }
 
+        // GET: api/Iots/GetIotbybybuilding/1
+        [HttpGet("GetIotbybybuilding/{id}")]
+        public async Task<ActionResult<Iot>> GetIotbybybuilding(int id)
+        {
+            var iot =  _context.Iot
+                .Where(iotb => iotb.Idbuilding == id)
+                .FirstOrDefault();
+
+            if (iot == null)
+            {
+                return NotFound();
+            }
+
+            return iot;
+        }
+
         // PUT: api/Iots/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

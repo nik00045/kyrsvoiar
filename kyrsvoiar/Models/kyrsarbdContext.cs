@@ -41,8 +41,8 @@ namespace kyrsvoiar.Models
                 entity.ToTable("anchor");
 
                 entity.Property(e => e.Idanchor)
-                    .HasColumnName("idanchor")
-                    .ValueGeneratedOnAdd();
+                    .HasColumnName("idanchor").ValueGeneratedNever();
+                   
                     
 
                 entity.Property(e => e.Code)
@@ -63,7 +63,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idbuilding)
                     .HasColumnName("idbuilding")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Idowner).HasColumnName("idowner");
 
@@ -86,7 +86,7 @@ namespace kyrsvoiar.Models
 
                 entity.Property(e => e.Idiot)
                     .HasColumnName("idiot")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Idbuilding).HasColumnName("idbuilding");
 

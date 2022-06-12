@@ -41,6 +41,22 @@ namespace kyrsvoiar.Controllers
             return building;
         }
 
+        // GET: api/Buildings/GetAdmcode/qweqwe
+        [HttpGet("GetAdmcode/{Admincode}")]
+        public async Task<ActionResult<Building>> GetAdmcode(string Admincode)
+        {
+            var building = _context.Building
+                .Where(builb => builb.Admincode == Admincode)
+                .FirstOrDefault();
+
+            if (building == null)
+            {
+                return NotFound();
+            }
+
+            return building;
+        }
+
         // PUT: api/Buildings/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

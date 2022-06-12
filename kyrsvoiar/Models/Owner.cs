@@ -9,16 +9,10 @@ namespace kyrsvoiar.Models
 {
     public partial class Owner
     {
-        public Owner()
-        {
-            Building = new HashSet<Building>();
-        }
-
         public int Idowner { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-
-        public virtual ICollection<Building> Building { get; set; }
+    
     }
 }
