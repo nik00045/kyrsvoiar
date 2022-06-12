@@ -28,6 +28,15 @@ namespace kyrsvoiar.Controllers
             return await _context.Anchor.ToListAsync();
         }
 
+        // GET: api/mobile/GetlastAnchors
+        [HttpGet("GetlastAnchors")]
+        public async Task<ActionResult<Anchor>> GetlastAnchors()
+        {
+            var anchor =  _context.Anchor.ToList().Last();
+
+            return anchor;
+        }
+
         // GET: api/mobile/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Anchor>> GetAnchor(int id)
