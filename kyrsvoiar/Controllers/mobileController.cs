@@ -110,6 +110,23 @@ namespace kyrsvoiar.Controllers
             return CreatedAtAction("GetAnchor", new { id = anchor.Idanchor }, anchor);
         }
 
+
+        // DELETE: api/mobile/DeleteAnchor/5
+        [HttpGet("DeleteAnchor/{id}")]
+        public async Task<ActionResult<Anchor>> DeleteAnchorMobile(int id)
+        {
+            var anchor = await _context.Anchor.FindAsync(id);
+            if (anchor == null)
+            {
+                return NotFound();
+            }
+
+            _context.Anchor.Remove(anchor);
+            await _context.SaveChangesAsync();
+
+            return anchor;
+        }
+
         // DELETE: api/mobile/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Anchor>> DeleteAnchor(int id)
