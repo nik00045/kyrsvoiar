@@ -28,6 +28,13 @@ namespace kyrsvoiar.Controllers
             return await _context.Anchor.ToListAsync();
         }
 
+        //api/mobile/GetAnchorsByiot/1
+        [HttpGet("GetAnchorsByiot/{id}")]
+        public async Task<ActionResult<IEnumerable<Anchor>>> GetAnchorsByiot(int id)
+        {
+            return await _context.Anchor.Where(iotid => iotid.Idiot == id).ToListAsync();
+        }
+
         // GET: api/mobile/GetlastAnchors
         [HttpGet("GetlastAnchors")]
         public async Task<ActionResult<Anchor>> GetlastAnchors()
