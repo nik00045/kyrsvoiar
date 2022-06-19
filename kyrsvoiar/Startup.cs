@@ -1,4 +1,6 @@
+using kyrsvoiar.Handlers;
 using kyrsvoiar.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,7 +31,12 @@ namespace kyrsvoiar
         {
             services.AddControllers();
             // services.AddScoped<mobilearContext, mobilearContext()>();
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
             services.AddDbContext<kyrsarbdContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MobileARDB")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +50,8 @@ namespace kyrsvoiar
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

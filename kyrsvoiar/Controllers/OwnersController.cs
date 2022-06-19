@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using kyrsvoiar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace kyrsvoiar.Controllers
 {
+
+    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class OwnersController : ControllerBase
@@ -38,6 +42,22 @@ namespace kyrsvoiar.Controllers
         public async Task<ActionResult<Owner>> GetOwner(int id)
         {
             var owner = await _context.Owner.FindAsync(id);
+
+            if (owner == null)
+            {
+                return NotFound();
+            }
+
+            return owner;
+        }
+
+        // GET: api/Owners/Getuser
+        [HttpGet("Getuser")]
+        public async Task<ActionResult<Owner>> GetUser()
+        {
+            string email = HttpContext.User.Identity.Name;
+
+            var owner = await _context.Owner.Where(owner => owner.Mail == email).FirstOrDefaultAsync();
 
             if (owner == null)
             {

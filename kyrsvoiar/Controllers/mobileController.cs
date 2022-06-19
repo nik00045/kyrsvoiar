@@ -118,7 +118,7 @@ namespace kyrsvoiar.Controllers
         }
 
 
-        // DELETE: api/mobile/DeleteAnchor/5
+        // GET: api/mobile/DeleteAnchor/5
         [HttpGet("DeleteAnchor/{id}")]
         public async Task<ActionResult<Anchor>> DeleteAnchorMobile(int id)
         {
