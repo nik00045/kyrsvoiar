@@ -58,39 +58,6 @@ namespace kyrsvoiar.Controllers
             return anchor;
         }
 
-
-        // PUT: api/mobile/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnchor(int id, Anchor anchor)
-        {
-            if (id != anchor.Idanchor)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(anchor).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AnchorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/mobile
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
