@@ -11,6 +11,8 @@ namespace kyrsvoiar
 {
     public class Program
     {
+        public static string pubKey = "0";
+        public static string priKey = "0";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
