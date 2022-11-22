@@ -57,7 +57,7 @@ namespace kyrsvoiar.Controllers
                 Program.priKey = privKeyString;
             }
         }
-        public string MakePubKey()
+        public async Task<string> MakePubKey()
         {
             //lets take a new CSP with a new 2048 bit rsa key pair
 
@@ -161,10 +161,12 @@ namespace kyrsvoiar.Controllers
             return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("aaaaaaaa", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
         [HttpGet("Getpubkey")]
-        public string Getpubkey()
+        public async Task<string> Getpubkey()
         {
-            MakeKey();
-            return Program.pubKey;
+            string pubKey = await MakePubKey();
+            priKeyPath = MakePriKey();
+         //   MakeKey();
+            return pubKey;
         }
 
         [HttpPost]
