@@ -161,6 +161,8 @@ namespace kyrsvoiar.Controllers
             return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("aaaaaaaa", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
         [HttpGet("Getpubkey")]
+        [Produces("text/plain")]
+        [Consumes("text/plain")]
         public async Task<string> Getpubkey()
         {
             string pubKey = await MakePubKey();
@@ -170,8 +172,7 @@ namespace kyrsvoiar.Controllers
         }
 
         [HttpPost]
-        [Produces("text/plain")]
-        [Consumes("text/plain")]
+
         public async Task<string> GetAnchorsByiot()
         {
             string data;
