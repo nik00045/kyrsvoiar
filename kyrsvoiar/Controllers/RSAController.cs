@@ -237,7 +237,7 @@ namespace kyrsvoiar.Controllers
             }
             res =  DecryptFile(HexString2B64String(data), Program.priKey);
             //Request.Body.ToString();
-            return res;
+            return Convert.ToBase64String(res);
         }
 
     }
