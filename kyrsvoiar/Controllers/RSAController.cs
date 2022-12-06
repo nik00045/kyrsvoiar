@@ -18,7 +18,23 @@ namespace kyrsvoiar.Controllers
     {
         string pubKeyPath = "public.key";//change as needed
         string priKeyPath = "private.key";//change as needed
+        string st;
+        string stex;
         RSACryptoServiceProvider cspp = new RSACryptoServiceProvider(2048);
+
+        public static string ByteArrayToHexString(byte[] Bytes)
+        {
+            StringBuilder Result = new StringBuilder(Bytes.Length * 2);
+            string HexAlphabet = "0123456789ABCDEF";
+
+            foreach (byte B in Bytes)
+            {
+                Result.Append(HexAlphabet[(int)(B >> 4)]);
+                Result.Append(HexAlphabet[(int)(B & 0xF)]);
+            }
+
+            return Result.ToString();
+        }
         public void MakeKey()
         {
             //lets take a new CSP with a new 2048 bit rsa key pair
@@ -29,6 +45,8 @@ namespace kyrsvoiar.Controllers
 
             //and the public key ...
             RSAParameters pubKey = csp.ExportParameters(false);
+
+           
             //converting the public key into a string representation
             string pubKeyString;
             {
@@ -64,6 +82,11 @@ namespace kyrsvoiar.Controllers
 
             //and the public key ...
             RSAParameters pubKey = cspp.ExportParameters(false);
+
+            byte[] pubKeybayt = pubKey.Modulus;
+            byte[] pubKeybaytenmsds = pubKey.Exponent;
+            st = ByteArrayToHexString(pubKeybayt);
+            stex = ByteArrayToHexString(pubKeybaytenmsds);
             //converting the public key into a string representation
             string pubKeyString;
             {
@@ -78,7 +101,7 @@ namespace kyrsvoiar.Controllers
                 Program.pubKey = pubKeyString;
             }
 
-            return pubKeyString;
+            return st;
         }
         public string MakePriKey()
         {
@@ -120,7 +143,7 @@ namespace kyrsvoiar.Controllers
             byte[] bytesPlainTextData = Convert.FromBase64String(data);
 
             //apply pkcs#1.5 padding and encrypt our data 
-            var bytesCipherText = csp.Encrypt(bytesPlainTextData, false);
+            var bytesCipherText = csp.Encrypt(bytesPlainTextData , false);
             //we might want a string representation of our cypher text... base64 will do
             string encryptedText = Convert.ToBase64String(bytesCipherText);
             return encryptedText;
@@ -128,7 +151,13 @@ namespace kyrsvoiar.Controllers
         public string DecryptFile(string data, string priKeyPathXML)
         {
             //we want to decrypt, therefore we need a csp and load our private key
-            RSACryptoServiceProvider csp = new RSACryptoServiceProvider();
+           // RSACryptoServiceProvider csp = new RSACryptoServiceProvider();
+            CspParameters parms = new CspParameters();
+            parms.Flags = CspProviderFlags.NoFlags;
+            parms.KeyContainerName = Guid.NewGuid().ToString().ToUpperInvariant();
+            parms.ProviderType = ((Environment.OSVersion.Version.Major > 5) || ((Environment.OSVersion.Version.Major == 5) && (Environment.OSVersion.Version.Minor >= 1))) ? 0x18 : 1;
+
+            RSACryptoServiceProvider csp = new RSACryptoServiceProvider(parms);
 
             string privKeyString;
             {
@@ -146,10 +175,18 @@ namespace kyrsvoiar.Controllers
             byte[] bytesCipherText = Convert.FromBase64String(encryptedText);
 
             //decrypt and strip pkcs#1.5 padding
-            byte[] bytesPlainTextData = csp.Decrypt(bytesCipherText, false);
+           
 
             //get our original plainText back...
-            return Convert.ToBase64String(bytesPlainTextData);
+            try
+            {
+                byte[] bytesPlainTextData = csp.Decrypt(bytesCipherText, false);
+                return Convert.ToBase64String(bytesPlainTextData);
+            }catch(Exception e)
+            {
+                return e.ToString();
+            }
+            //return Convert.ToBase64String(bytesPlainTextData);
         }
 
         [HttpGet]
@@ -158,7 +195,7 @@ namespace kyrsvoiar.Controllers
             //  pubKeyPath = MakePubKey();
             // priKeyPath = MakePriKey();
             MakeKey();
-            return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
+            return " pubKey ---" +  pubKeyPath + "\n punbasd - "+ st "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n ";
         }
         [HttpGet("Getpubkey")]
         [Produces("text/plain")]
