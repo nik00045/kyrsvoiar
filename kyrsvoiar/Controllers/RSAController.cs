@@ -158,7 +158,7 @@ namespace kyrsvoiar.Controllers
             //  pubKeyPath = MakePubKey();
             // priKeyPath = MakePriKey();
             MakeKey();
-            return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("aaaaaaaa", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
+            return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
         [HttpGet("Getpubkey")]
         [Produces("text/plain")]
@@ -167,8 +167,11 @@ namespace kyrsvoiar.Controllers
         {
             string pubKey = await MakePubKey();
             priKeyPath = MakePriKey();
-         //   MakeKey();
-            return pubKey;
+            pubKeyPath = pubKey;
+            //   MakeKey();
+
+            // return pubKey;
+            return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
 
         [HttpPost]
@@ -176,12 +179,14 @@ namespace kyrsvoiar.Controllers
         public async Task<string> GetAnchorsByiot()
         {
             string data;
+            string res;
             using (System.IO.StreamReader reader = new System.IO.StreamReader(Request.Body, Encoding.UTF8))
             {
                 data = await reader.ReadToEndAsync();
             }
+            res =  DecryptFile(data, Program.priKey);
             //Request.Body.ToString();
-            return DecryptFile(data, Program.priKey);
+            return res;
         }
 
     }
