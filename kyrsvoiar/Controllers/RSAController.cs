@@ -170,8 +170,8 @@ namespace kyrsvoiar.Controllers
             pubKeyPath = pubKey;
             //   MakeKey();
 
-            // return pubKey;
-            return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
+             return pubKey;
+            //return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
 
         [HttpPost]
