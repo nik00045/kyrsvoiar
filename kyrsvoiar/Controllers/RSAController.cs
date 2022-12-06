@@ -225,8 +225,13 @@ namespace kyrsvoiar.Controllers
             //return " pubKey ---" + pubKeyPath + "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n " + DecryptFile(EncryptFile("aaaaaaaa", pubKeyPath), priKeyPath);
         }
 
-        [HttpPost]
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
 
+        [HttpPost]
         public async Task<string> GetAnchorsByiot()
         {
             string data;
@@ -237,7 +242,7 @@ namespace kyrsvoiar.Controllers
             }
             res =  DecryptFile(HexString2B64String(data), Program.priKey);
             //Request.Body.ToString();
-            return Convert.ToBase64String(res);
+            return Base64Decode(res);
         }
 
     }
