@@ -25,7 +25,7 @@ namespace kyrsvoiar.Controllers
         public static string ByteArrayToHexString(byte[] Bytes)
         {
             StringBuilder Result = new StringBuilder(Bytes.Length * 2);
-            string HexAlphabet = "0123456789ABCDEF";
+            string HexAlphabet = "0123456789abcdef";
 
             foreach (byte B in Bytes)
             {
