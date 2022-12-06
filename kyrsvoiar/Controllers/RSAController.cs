@@ -165,13 +165,13 @@ namespace kyrsvoiar.Controllers
         public string DecryptFile(string data, string priKeyPathXML)
         {
             //we want to decrypt, therefore we need a csp and load our private key
-           // RSACryptoServiceProvider csp = new RSACryptoServiceProvider();
-            CspParameters parms = new CspParameters();
-            parms.Flags = CspProviderFlags.NoFlags;
-            parms.KeyContainerName = Guid.NewGuid().ToString().ToUpperInvariant();
-            parms.ProviderType = ((Environment.OSVersion.Version.Major > 5) || ((Environment.OSVersion.Version.Major == 5) && (Environment.OSVersion.Version.Minor >= 1))) ? 0x18 : 1;
+            RSACryptoServiceProvider csp = new RSACryptoServiceProvider();
+            //CspParameters parms = new CspParameters();
+           // parms.Flags = CspProviderFlags.NoFlags;
+           // parms.KeyContainerName = Guid.NewGuid().ToString().ToUpperInvariant();
+           // parms.ProviderType = ((Environment.OSVersion.Version.Major > 5) || ((Environment.OSVersion.Version.Major == 5) && (Environment.OSVersion.Version.Minor >= 1))) ? 0x18 : 1;
 
-            RSACryptoServiceProvider csp = new RSACryptoServiceProvider(parms);
+           // RSACryptoServiceProvider csp = new RSACryptoServiceProvider(parms);
 
             string privKeyString;
             {
