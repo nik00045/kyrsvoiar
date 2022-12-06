@@ -195,7 +195,7 @@ namespace kyrsvoiar.Controllers
             //  pubKeyPath = MakePubKey();
             // priKeyPath = MakePriKey();
             MakeKey();
-            return " pubKey ---" +  pubKeyPath + "\n punbasd - "+ st "\n " + "  priKey ---" + priKeyPath + "\n " + EncryptFile("qqqq", pubKeyPath) + "\n ";
+            return " pubKey ---" +  pubKeyPath + "\n punbasd - "+ st + "\n " + "  priKey ---" + priKeyPath + "\n ";
         }
         [HttpGet("Getpubkey")]
         [Produces("text/plain")]
