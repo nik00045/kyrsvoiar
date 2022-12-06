@@ -35,6 +35,19 @@ namespace kyrsvoiar.Controllers
 
             return Result.ToString();
         }
+        public static string HexString2B64String(string input)
+        {
+            return System.Convert.ToBase64String(HexStringToHex(input));
+        }
+        public static byte[] HexStringToHex(string inputHex)
+        {
+            var resultantArray = new byte[inputHex.Length / 2];
+            for (var i = 0; i < resultantArray.Length; i++)
+            {
+                resultantArray[i] = System.Convert.ToByte(inputHex.Substring(i * 2, 2), 16);
+            }
+            return resultantArray;
+        }
         public void MakeKey()
         {
             //lets take a new CSP with a new 2048 bit rsa key pair
@@ -148,6 +161,7 @@ namespace kyrsvoiar.Controllers
             string encryptedText = Convert.ToBase64String(bytesCipherText);
             return encryptedText;
         }
+
         public string DecryptFile(string data, string priKeyPathXML)
         {
             //we want to decrypt, therefore we need a csp and load our private key
@@ -221,7 +235,7 @@ namespace kyrsvoiar.Controllers
             {
                 data = await reader.ReadToEndAsync();
             }
-            res =  DecryptFile(data, Program.priKey);
+            res =  DecryptFile(HexString2B64String(data), Program.priKey);
             //Request.Body.ToString();
             return res;
         }
